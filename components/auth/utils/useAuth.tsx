@@ -4,7 +4,7 @@ interface useAuthProps {
 }
 
 
-export const useAuth=(): useAuthProps => {
+export const useAuth = (): useAuthProps => {
   return {
     isLoading: true,
     isAuthenticated: false

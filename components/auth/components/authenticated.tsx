@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { useAuth } from "../utils/useAuth"
 
 export const Authenticated = ({ children }: { children: ReactNode }) => {
-  const { isLoading, isAuthenticated} = useAuth();  
+  const { isAuthenticated, isLoading} = useAuth();  
   if (isLoading || !isAuthenticated) {
     return null;
   }
