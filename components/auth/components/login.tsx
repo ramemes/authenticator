@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input";
 import { generateToken } from "../utils/utils"
+import { useAuthContext } from "../auth-context"
  
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -29,7 +30,8 @@ const formSchema = z.object({
 
 
 
-export const Login = () => {
+export const Login: React.FC = () => {
+  const { setIsAuthenticated } = useAuthContext();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,9 +43,9 @@ export const Login = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     const token = generateToken();
     sessionStorage.setItem('authToken', token);
-    console.log(values)
-    console.log(token)
+    setIsAuthenticated(true)
   }
+
   return (
     <div className="h-full w-full flex flex-col justify-center items-center translate-y-[100%]">
       <Form {...form} >

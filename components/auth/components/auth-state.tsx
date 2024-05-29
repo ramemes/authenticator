@@ -1,28 +1,28 @@
 import { ReactNode } from "react";
-import { useAuth } from "../utils/useAuth"
+import { useAuthContext } from "../auth-context";
 
 
 
-export const Authenticated = ({ children }: { children: ReactNode }) => {
-  const { isAuthenticated, isLoading} = useAuth();  
-  if (!isAuthenticated || isLoading) {
+export const Authenticated: React.FC<{ children: ReactNode }> = ({ children }: { children: ReactNode }) => {
+  const { isAuthenticated, isLoading } = useAuthContext();
+    if (!isAuthenticated || isLoading) {
     return null;
   }
   return <>{children}</>
 }
 
-export const Unauthenticated = ({ children }: { children: ReactNode }) => {
-  const { isLoading, isAuthenticated } = useAuth();  
-  if (isAuthenticated || isLoading) {
+export const Unauthenticated: React.FC<{ children: ReactNode }> = ({ children }: { children: ReactNode }) => {
+  const { isAuthenticated, isLoading } = useAuthContext();
+    if (isAuthenticated || isLoading) {
     return null;
   }
   return <>{children}</>
 }
 
 
-export const AuthLoading = ({ children }: { children: ReactNode }) => {
-  const { isAuthenticated, isLoading } = useAuth();  
-  if (!isLoading) {
+export const AuthLoading: React.FC<{ children: ReactNode }> = ({ children }: { children: ReactNode }) => {
+  const { isAuthenticated, isLoading } = useAuthContext();
+    if (!isLoading) {
     return null;
   }
   return <>{children}</>
