@@ -16,20 +16,20 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input";
+import { generateToken } from "../utils/utils"
  
 const formSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
   password: z.string().min(9, {
-    message: "Password must contain Uppercase and special characters.",
+    message: "Password must be at least 9 characters.",
   }),
 })
 
 
 
 export const Login = () => {
-  // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,11 +38,11 @@ export const Login = () => {
     },
   })
  
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    const token = generateToken();
+    sessionStorage.setItem('authToken', token);
     console.log(values)
+    console.log(token)
   }
   return (
     <div className="h-full w-full flex flex-col justify-center items-center translate-y-[100%]">

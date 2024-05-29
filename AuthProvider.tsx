@@ -1,9 +1,11 @@
-import { ReactElement } from "react";
+"use client";
+
+import { ReactElement, useEffect } from "react";
 import { Loading } from "./components/auth/components/loading";
-import { Authenticated } from "./components/auth/components/authenticated";
-import { Unauthenticated } from "./components/auth/components/unauthenticated";
+import { Authenticated, Unauthenticated, AuthLoading } from "./components/auth/components/auth-state";
+
 import { useAuth } from "./components/auth/utils/useAuth";
-import { AuthLoading } from "./components/auth/components/auth-loading";
+
 import { Login } from "./components/auth/components/login";
 
 interface AuthProviderProps {
@@ -15,8 +17,17 @@ interface AuthProviderProps {
 export const AuthProvider = ({
   children,
 }: AuthProviderProps) => {
-  const { isAuthenticated } = useAuth();
+  const { isLoading, isAuthenticated } = useAuth();
   console.log(isAuthenticated)
+
+  if (isLoading) {
+    return (
+      <AuthLoading>
+        <Loading/>  
+      </AuthLoading>
+    )
+  }
+
   return (
     <>
       <Authenticated>
