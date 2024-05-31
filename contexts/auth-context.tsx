@@ -1,9 +1,9 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
-import { AuthLoading, Authenticated, Unauthenticated } from "./components/auth-state";
-import { Loading } from "./components/loading";
-import { Login } from "./components/login";
+import { AuthLoading, Authenticated, Unauthenticated } from "../components/auth/auth-state";
+import { Loading } from "../components/auth/loading";
+import { Login } from "../components/auth/login";
 
 interface AuthContextProps {
   isAuthenticated: boolean;
@@ -41,7 +41,7 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
       setIsAuthenticated(false);
     }
     setIsLoading(false);
-  }, [setIsAuthenticated, isAuthenticated]);
+  }, [isAuthenticated]);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, isLoading, setIsAuthenticated, setIsLoading }}>

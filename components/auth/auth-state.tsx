@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { useAuthContext } from "../auth-context";
+import { useAuthContext } from "../../contexts/auth-context";
 
 
 

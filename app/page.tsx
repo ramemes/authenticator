@@ -1,7 +1,6 @@
 "use client";
-import { useAuthContext } from "@/components/auth/auth-context";
+import { useAuthContext } from "@/contexts/auth-context";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 
 export default function Home() {
 
